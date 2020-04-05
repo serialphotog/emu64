@@ -71,6 +71,12 @@ void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
                 exit(1);
             }
             break;
+        case OP_LUI:
+            op_lui(cpu, instruction->rt, instruction->offset);
+            break;
+        case OP_ADDIU:
+           op_addiu(cpu, instruction->rs, instruction->rt, instruction->offset);
+           break;
         default:
             printf("[CPU]: Unknown instruction: %#04x\n", instruction->opcode);
             exit(1);
@@ -83,5 +89,20 @@ void op_mtc0(CPU* cpu, uint8_t rt, uint8_t rd)
     uint64_t* source = cpu_map_register(cpu->state, rt);
     uint64_t* dest = cp0_map_register(cpu->cp0, rd);
     *dest = *source;
+    cpu->state->pc += 4;
+}
+
+void op_lui(CPU* cpu, uint8_t rt, uint16_t imm)
+{
+    uint64_t* dest = cpu_map_register(cpu->state, rt);
+    *dest = (uint64_t)(imm << 16);
+    cpu->state->pc += 4;
+}
+
+void op_addiu(CPU* cpu, uint8_t rs, uint8_t rt, uint16_t imm)
+{
+    uint64_t* dest = cpu_map_register(cpu->state, rt);
+    uint64_t* source = cpu_map_register(cpu->state, rs);
+    *dest = source + (int16_t)imm;
     cpu->state->pc += 4;
 }

@@ -53,4 +53,16 @@ void cpu_destory(CPU* cpu);
  */
 void op_mtc0(CPU* cpu, uint8_t rt, uint8_t rd);
 
+/**
+ * Load upper limit
+ * rt = imm << 16
+ */
+void op_lui(CPU* cpu, uint8_t rt, uint16_t imm);
+
+/**
+ * Add Imediate Unsigned
+ * rt = rs + imm
+ */
+void op_addiu(CPU* cpu, uint8_t rs, uint8_t rt, uint16_t imm);
+
 #endif

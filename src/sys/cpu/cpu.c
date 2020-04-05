@@ -80,6 +80,7 @@ void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
 
 void op_mtc0(CPU* cpu, uint8_t rt, uint8_t rd)
 {
-    printf("Implement me!!\n");
-    exit(1);
+    uint64_t* source = cpu_map_register(cpu->state, rt);
+    uint64_t* dest = cp0_map_register(cpu->cp0, rd);
+    *dest = *source;
 }

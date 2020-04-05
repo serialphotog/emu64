@@ -103,6 +103,9 @@ typedef struct CPUState {
     uint32_t fcr31; // float point control/status register
 } CPUState;
 
+// Maps a register number to a physical register
+uint64_t* cpu_map_register(CPUState* state, uint8_t reg);
+
 // Creates a new CPU state instance
 CPUState* cpuState_create();
 

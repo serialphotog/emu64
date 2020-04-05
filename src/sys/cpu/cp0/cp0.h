@@ -56,6 +56,9 @@ typedef struct CP0 {
     CP0State* state; // The internal state for CP0
 } CP0;
 
+// Maps a register number to a physical register
+uint64_t* cp0_map_register(CP0* cp0, uint8_t reg);
+
 // Creates a new CP0 instance
 CP0* cp0_create();
 

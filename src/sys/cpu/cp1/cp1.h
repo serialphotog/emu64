@@ -10,6 +10,7 @@
 // The internal state for the fpu
 typedef struct CP1State {
     // TODO: Implement the internal state as necessary...
+    int foo; // Temporary to silence compiler error for now
 } CP1State;
 
 // The main structure for the FPU

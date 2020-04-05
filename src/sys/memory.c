@@ -1,3 +1,7 @@
+#ifdef __WIN32
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "sys/memory.h"
 
 #include <stdio.h>
@@ -196,17 +200,10 @@ uint32_t memory_read_word(Memory* memory, uint32_t addr)
     uint32_t pointer = phys_addr - section->offset;
     if (pointer) pointer /= 4;
     uint32_t* ptr = (uint32_t*)section->pointer;
-    uint32_t value;
-
-    __asm__(
-        "movl %1, %%eax;"
-        "bswap %%eax;"
-        "movl %%eax, %0;"
-        :"=r"(value)
-        :"r"(ptr[pointer])
-        :"%eax"
-    );
-
+    uint32_t value = ((ptr[pointer] >> 24) & 0xff) |
+        ((ptr[pointer] << 8) & 0xff0000) |
+        ((ptr[pointer] >> 8) & 0xff00) |
+        ((ptr[pointer] << 24) & 0xff000000);
     return value;
 }
 
@@ -217,13 +214,8 @@ void memory_write_word(Memory* memory, uint32_t addr, uint32_t value)
     uint32_t pointer = phys_addr - section->offset;
     if (pointer) pointer /= 4;
     uint32_t *ptr = (uint32_t*)section->pointer;
-
-    __asm__(
-        "movl %1, %%eax;"
-        "bswap %%eax;"
-        "movl %%eax, %0;"
-        :"=r"(ptr[pointer])
-        :"r"(value)
-        :"%eax"
-    );
+    ptr[pointer] = ((value >> 24) & 0xff) |
+        ((value << 8) & 0xff0000) |
+        ((value >> 8) & 0xff00) |
+        ((value << 24) & 0xff000000);
 }

@@ -3,6 +3,9 @@
 
 #include "sys/sys.h"
 
+#include <gl/glew.h>
+#include <GLFW/glfw3.h>
+
 int main(int argc, char* argv[]) 
 {
 	if (argv[1] == NULL)

@@ -12,5 +12,7 @@ set(EMU_SRCS
 	sys/pif.c
 )
 include_directories(.)
+include_directories(${GLFW_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME} ${EMU_SRCS})
+target_link_libraries(${PROJECT_NAME} GLEW::GLEW ${GLFW_LIBRARY})

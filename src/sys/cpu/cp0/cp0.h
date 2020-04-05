@@ -59,9 +59,6 @@ typedef struct CP0 {
 // Creates a new CP0 instance
 CP0* cp0_create();
 
-// Translates a virtual address into a physical address
-uint32_t virt_addr_to_phys_addr(uint64_t virt_addr);
-
 // Perform cleanup
 void cp0_destroy(CP0* cp0);
 

@@ -61,7 +61,6 @@ Instruction* cpu_fetch_instruction(Memory* memory, uint32_t addr)
 
 void cpu_decode_instruction(Instruction* instruction)
 {
-    printf("Instruction: %#010x\n", instruction->instruction);
     instruction->opcode = instruction->instruction >> 26;
     instruction->rs = instruction->base = (instruction->instruction >> 21) & 0x1f;
     instruction->rt = (instruction->instruction >> 16) & 0x1f;

@@ -25,33 +25,6 @@ void cpu_run(CPU* cpu, Memory* memory)
     }
 }
 
-void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
-{
-    switch(instruction->opcode)
-    {
-        case OP_MFC0: // Identical to MTC0. Determined by value of rs
-            if (instruction->rs == MFC0_RS_FLAG)
-            {
-                printf("Found MFC0\n");
-            }
-            else if (instruction->rs == MTC0_RS_FLAG)
-            {
-               printf("Found MTC0\n");
-            }
-            else 
-            {
-                printf("[CPU]: Unknown MFC0/MTC0 flag: %#02x\n", instruction->rs);
-                exit(1);
-            }
-            exit(1);
-            break;
-        default:
-            printf("[CPU]: Unknown instruction: %#04x\n", instruction->opcode);
-            exit(1);
-            break;
-    }
-}
-
 Instruction* cpu_fetch_instruction(Memory* memory, uint32_t addr)
 {
     Instruction* instruction = calloc(1, sizeof(Instruction));
@@ -76,4 +49,37 @@ void cpu_destory(CPU* cpu)
     cp1_destroy(cpu->cp1);
     cpuState_destroy(cpu->state);
     free(cpu);
+}
+
+void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
+{
+    switch(instruction->opcode)
+    {
+        case OP_MFC0: // Identical to MTC0. Determined by value of rs
+            if (instruction->rs == MFC0_RS_FLAG)
+            {
+                printf("Found MFC0. Implement me!\n");
+                exit(1);
+            }
+            else if (instruction->rs == MTC0_RS_FLAG)
+            {
+               op_mtc0(cpu, instruction->rt, instruction->rd);
+            }
+            else 
+            {
+                printf("[CPU]: Unknown MFC0/MTC0 flag: %#02x\n", instruction->rs);
+                exit(1);
+            }
+            break;
+        default:
+            printf("[CPU]: Unknown instruction: %#04x\n", instruction->opcode);
+            exit(1);
+            break;
+    }
+}
+
+void op_mtc0(CPU* cpu, uint8_t rt, uint8_t rd)
+{
+    printf("Implement me!!\n");
+    exit(1);
 }

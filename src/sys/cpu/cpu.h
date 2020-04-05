@@ -44,4 +44,13 @@ Instruction* cpu_fetch_instruction(Memory* memory, uint32_t addr);
 // Performs cleanup
 void cpu_destory(CPU* cpu);
 
+//
+// CPU Instructions
+//
+
+/**
+ * Moves the contents of the word in cpu reg rt, to cp0 reg rd.
+ */
+void op_mtc0(CPU* cpu, uint8_t rt, uint8_t rd);
+
 #endif

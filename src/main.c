@@ -42,6 +42,22 @@ DWORD WINAPI EmulatorThread(void* data)
 	System* sys = (System*)data;
 	sys_boot(sys);
 }
+
+HANDLE thread;
+void run_emulator(System* system, const char* rom_path)
+{
+	sys_load_rom(system, rom_path);
+	thread = CreateThread(NULL, 0, EmulatorThread, system, 0, NULL);
+
+	if (thread)
+	{
+
+	}
+	else
+	{
+		printf("[ERROR]: Emulator thread failed to run!\n");
+	}
+}
 #endif
 
 // TODO: Potentially add Linux threading...
@@ -118,23 +134,34 @@ int main(int argc, char* argv[])
 				nk_layout_row_dynamic(ctx, 25, 1);
 				if (nk_menu_item_label(ctx, "Load Rom", NK_TEXT_LEFT))
 				{
-					sys_load_rom(system, argv[1]); // TODO: File picker...
+					// TODO: File picker...
+					run_emulator(system, argv[1]);
+				}
 
+				if (nk_menu_item_label(ctx, "Exit", NK_TEXT_LEFT))
+				{
 					#if _WIN32 || _WIN64
-						HANDLE thread = CreateThread(NULL, 0, EmulatorThread, system, 0, NULL);
-						if (thread)
-						{
-							// TODO: Potentially do more with the thread...
-						}
-						else
-						{
-							printf("[ERROR]: Emulator thread failed to run!\n");
-						}
+						TerminateThread(thread, 0);
 					#endif
-					// TODO: Potentially add Linux threading...
+					glfwSetWindowShouldClose(win, GLFW_TRUE);
 				}
 				nk_menu_end(ctx);
 			}
+
+			nk_layout_row_push(ctx, 60);
+			if (nk_menu_begin_label(ctx, "Emulator", NK_TEXT_LEFT, nk_vec2(120, 200)))
+			{
+				nk_layout_row_dynamic(ctx, 25, 1);
+				if (nk_menu_item_label(ctx, "Stop", NK_TEXT_LEFT))
+				{
+					#if _WIN32 || _WIN64
+						if (thread)
+							TerminateThread(thread, 0);
+					#endif
+				}
+				nk_menu_end(ctx);
+			}
+
 			nk_menubar_end(ctx);
 		}
 

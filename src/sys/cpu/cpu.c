@@ -59,7 +59,7 @@ void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
             if (instruction->rs == MFC0_RS_FLAG)
             {
                 printf("Found MFC0. Implement me!\n");
-                exit(1);
+                // TOOD: Implement me
             }
             else if (instruction->rs == MTC0_RS_FLAG)
             {
@@ -68,7 +68,7 @@ void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
             else 
             {
                 printf("[CPU]: Unknown MFC0/MTC0 flag: %#02x\n", instruction->rs);
-                exit(1);
+                // TODO: Implement me
             }
             break;
         case OP_LUI:
@@ -79,7 +79,6 @@ void cpu_execute_instruction(CPU* cpu, Memory* memory, Instruction* instruction)
            break;
         default:
             printf("[CPU]: Unknown instruction: %#04x\n", instruction->opcode);
-            exit(1);
             break;
     }
 }

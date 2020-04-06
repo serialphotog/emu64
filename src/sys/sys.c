@@ -5,14 +5,19 @@
 
 #include "sys/pif.h"
 
-System* sys_create(char* rom_path) 
+System* sys_create() 
 {
     System* sys = calloc(1, sizeof(System));
     sys->cpu = cpu_create();
     sys->memory = memory_create();
-    memory_load_rom(sys->memory, rom_path);
     
     return sys;
+}
+
+void sys_load_rom(System* sys, const char* path)
+{
+    printf("[INFO]: Loaded rom %s\n", path);
+    memory_load_rom(sys->memory, path);
 }
 
 void sys_boot(System* sys) 

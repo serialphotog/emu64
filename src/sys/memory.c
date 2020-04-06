@@ -1,4 +1,4 @@
-#ifdef __WIN32
+#ifdef _WIN32 || _WIN64
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 

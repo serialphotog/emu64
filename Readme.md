@@ -14,3 +14,4 @@ cmake -G "NMake Makefiles" -DGLEW_INCLUDE_DIR:STRING="C:\glew-2.1.0\include" -DG
 
  * GLEW
  * GLFW
+ * Nuklear

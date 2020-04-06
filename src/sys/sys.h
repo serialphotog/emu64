@@ -13,6 +13,9 @@ typedef struct System {
 // Creates the system
 System* sys_create();
 
+// Loads a rom
+void sys_load_rom(System* sys, const char* path);
+
 // Emulates the boot process of the system
 void sys_boot(System* sys);
 

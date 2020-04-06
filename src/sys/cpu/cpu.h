@@ -4,6 +4,7 @@
 #include "sys/cpu/cp0/cp0.h"
 #include "sys/cpu/cp1/cp1.h"
 #include "sys/cpu/cpustate.h"
+#include "emu64.h"
 #include "sys/memory.h"
 
 // The primary structure for the CPU
@@ -11,6 +12,7 @@ typedef struct CPU {
     CP0* cp0; // The system coprocessor
     CP1* cp1; // The system FPU coprocessor
     CPUState* state; // Stores the current state of the CPU
+    EmuFlags* flags; // Global emulator flags
 } CPU;
 
 // Represents an instruction within the system
@@ -27,7 +29,7 @@ typedef struct Instruction {
 } Instruction;
 
 // Creates a new CPU instance
-CPU* cpu_create();
+CPU* cpu_create(EmuFlags* flags);
 
 // Runs the CPU fetch-execute cycle
 void cpu_run(CPU* cpu, Memory* memory);

@@ -2,16 +2,18 @@
 #define __EMU_SYS_H__
 
 #include "sys/cpu/cpu.h"
+#include "emu64.h"
 #include "sys/memory.h"
 
 // The primary system structure
 typedef struct System {
     CPU* cpu; // The system's CPU
     Memory* memory; // The system's memory
+    EmuFlags* flags; // Emulator control flags
 } System;
 
 // Creates the system
-System* sys_create();
+System* sys_create(EmuFlags* flags);
 
 // Loads a rom
 void sys_load_rom(System* sys, const char* path);

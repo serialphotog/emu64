@@ -7,6 +7,7 @@
 
 // TODO: Potentially add Linux threading support...
 
+#include "emu64.h"
 #include "sys/sys.h"
 
 #include <gl/glew.h>
@@ -28,6 +29,7 @@
 
 #define INITIAL_WIDTH 1200
 #define INITIAL_HEIGHT 800
+#define DEBUG_INITIAL_HEIGHT 450
 #define MAX_VERTEX_BUFFER 512 * 1024
 #define MAX_ELEMENT_BUFFER 128 * 1024
 
@@ -44,9 +46,8 @@ DWORD WINAPI EmulatorThread(void* data)
 }
 
 HANDLE thread;
-void run_emulator(System* system, const char* rom_path)
+void run_emulator(System* system)
 {
-	sys_load_rom(system, rom_path);
 	thread = CreateThread(NULL, 0, EmulatorThread, system, 0, NULL);
 
 	if (thread)
@@ -61,6 +62,19 @@ void run_emulator(System* system, const char* rom_path)
 #endif
 
 // TODO: Potentially add Linux threading...
+
+EmuFlags* flags_create()
+{
+    EmuFlags* flags = calloc(1, sizeof(EmuFlags));
+    flags->debugMode = 1;
+    flags->singleStepMode = 0;
+    return flags;
+}
+
+void flags_destroy(EmuFlags* flags)
+{
+    free(flags);
+}
 
 int main(int argc, char* argv[]) 
 {
@@ -113,7 +127,8 @@ int main(int argc, char* argv[])
 	bg.r = 0.10f, bg.g = 0.18f, bg.b = 0.24f, bg.a = 1.0f;
 
 	// Setup the emulator system
-	System* system = sys_create();
+	EmuFlags* flags = flags_create();
+	System* system = sys_create(flags);
 	
 	// GUI
 	while (!glfwWindowShouldClose(win))
@@ -123,7 +138,7 @@ int main(int argc, char* argv[])
 		nk_glfw3_new_frame();
 
 		// The main view
-		if (nk_begin(ctx, "Main", nk_rect(0, 0, width, height), NULL))
+		if (nk_begin(ctx, "Main", nk_rect(0, 0, 720, 576), NK_WINDOW_MOVABLE|NK_WINDOW_MINIMIZABLE))
 		{
 			// Menubar
 			nk_menubar_begin(ctx);
@@ -135,7 +150,8 @@ int main(int argc, char* argv[])
 				if (nk_menu_item_label(ctx, "Load Rom", NK_TEXT_LEFT))
 				{
 					// TODO: File picker...
-					run_emulator(system, argv[1]);
+					sys_load_rom(system, argv[1]);
+					run_emulator(system);
 				}
 
 				if (nk_menu_item_label(ctx, "Exit", NK_TEXT_LEFT))
@@ -149,23 +165,45 @@ int main(int argc, char* argv[])
 			}
 
 			nk_layout_row_push(ctx, 60);
-			if (nk_menu_begin_label(ctx, "Emulator", NK_TEXT_LEFT, nk_vec2(120, 200)))
+			if (nk_menu_begin_label(ctx, "Emulator", NK_TEXT_LEFT, nk_vec2(120, 250)))
 			{
 				nk_layout_row_dynamic(ctx, 25, 1);
-				if (nk_menu_item_label(ctx, "Stop", NK_TEXT_LEFT))
+				if (nk_menu_item_label(ctx, "Stop Emulation", NK_TEXT_LEFT))
 				{
 					#if _WIN32 || _WIN64
 						if (thread)
 							TerminateThread(thread, 0);
 					#endif
 				}
+
+				nk_checkbox_label(ctx, "Enable Debug", &flags->debugMode);
 				nk_menu_end(ctx);
 			}
-
 			nk_menubar_end(ctx);
 		}
-
 		nk_end(ctx);
+
+		if (flags->debugMode)
+		{
+			if (nk_begin(ctx, "Debug", nk_rect(0, height - DEBUG_INITIAL_HEIGHT, width, DEBUG_INITIAL_HEIGHT), 
+				NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE))
+			{
+				nk_layout_row_begin(ctx, NK_STATIC, 30, 2);
+				nk_layout_row_push(ctx, 500);
+				nk_checkbox_label(ctx, "Single Step Mode", &flags->singleStepMode);
+
+				if (flags->singleStepMode)
+				{
+					// The processor should only execute one operation at a time
+					if (nk_button_label(ctx, "Step"))
+					{
+						cpu_run(system->cpu, system->memory);
+					}
+				}
+			}
+			nk_end(ctx);
+		}
+
 		// Draw
 		glfwGetWindowSize(win, &width, &height);
 		glViewport(0, 0, width, height);
@@ -177,6 +215,7 @@ int main(int argc, char* argv[])
 
 	// Cleanup
 	sys_destroy(system);
+	flags_destroy(flags);
 
 	nk_glfw3_shutdown();
 	glfwTerminate();

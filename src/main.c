@@ -200,6 +200,115 @@ int main(int argc, char* argv[])
 						cpu_run(system->cpu, system->memory);
 					}
 				}
+
+				// Display the debug information
+				nk_layout_row_static(ctx, 50, 200, 2);
+				nk_label(ctx, "Current PC: ", NK_TEXT_CENTERED);
+				nk_label(ctx, cpu_register_to_string(system->cpu->state->pc), NK_TEXT_LEFT);
+
+				nk_layout_row_static(ctx, 300, 500, 2);
+				if (nk_group_begin(ctx, "List", 0))
+				{
+					nk_layout_row_static(ctx, 25, 450, 1);
+					nk_label(ctx, "CPU GPRs", NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "r0", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->r0), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "at", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->at), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "v0", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->v0), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "v1", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->v1), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "a0", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->a0), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "a1", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->a1), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "a2", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->a2), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "a3", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->a3), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t0", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t0), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t1", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t1), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t2", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t2), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t3", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t3), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t4", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t4), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t5", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t5), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t6", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t6), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t7", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t7), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s0", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s0), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s1", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s1), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s2", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s2), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s3", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s3), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s4", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s4), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s5", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s5), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s6", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s6), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s7", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s7), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t8", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t8), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "t9", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->t9), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "k0", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->k0), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "k1", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->k1), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "gp", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->gp), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "sp", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->sp), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "s8", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->s8), NK_TEXT_CENTERED);
+					nk_layout_row_static(ctx, 18, 200, 2);
+					nk_label(ctx, "ra", NK_TEXT_CENTERED);
+					nk_label(ctx, cpu_register_to_string(system->cpu->state->ra), NK_TEXT_CENTERED);
+				}
+				nk_group_end(ctx);
 			}
 			nk_end(ctx);
 		}

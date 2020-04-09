@@ -43,6 +43,9 @@ void cpu_decode_instruction(Instruction* instruction);
 // Performs an instruction fetch
 Instruction* cpu_fetch_instruction(Memory* memory, uint32_t addr);
 
+// Converts a register's value to a string
+const char* cpu_register_to_string(uint64_t val);
+
 // Performs cleanup
 void cpu_destory(CPU* cpu);
 

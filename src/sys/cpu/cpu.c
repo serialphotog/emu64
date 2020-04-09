@@ -112,3 +112,17 @@ void op_addiu(CPU* cpu, uint8_t rs, uint8_t rt, uint16_t imm)
     *dest = source + (int16_t)imm;
     cpu->state->pc += 4;
 }
+
+const char* cpu_register_to_string(uint64_t val)
+{
+    if (val == NULL)
+    {
+        return "NULL";
+    }
+    else
+    {
+        char *result = malloc(11);
+        snprintf(result, 11, "%#10x", val);
+        return result;
+    }
+}

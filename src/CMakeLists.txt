@@ -14,4 +14,4 @@ set(EMU_SRCS
 include_directories(.)
 
 add_executable(${PROJECT_NAME} ${EMU_SRCS})
-target_link_libraries(${PROJECT_NAME} OpenGL::GL GLEW::GLEW glfw)
+target_link_libraries(${PROJECT_NAME} OpenGL::GL GLEW::GLEW glfw libemu64)

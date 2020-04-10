@@ -16,6 +16,7 @@ namespace Emu64::UI
         system->Boot();
     }
 
+    std::thread emulatorThread;
     void EmulatorWindow::ShowEmulatorWindow(bool* is_open)
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
@@ -53,7 +54,7 @@ namespace Emu64::UI
         if (fileBrowser.Render(showRomLoadDialog, romPath))
         {
             system->LoadRom((char*)romPath.c_str());
-            std::thread emulatorThread(runEmulatorThread);
+            emulatorThread = std::thread(runEmulatorThread);
         }
 
         ImGui::End();

@@ -7,6 +7,7 @@
         "memory.h": "c",
         "cpustate.h": "c",
         "pif.h": "c",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "cpu.h": "c"
     }
 }

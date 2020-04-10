@@ -3,6 +3,8 @@
 #include "imgui/imgui.h"
 #include "ui/file_browser.h"
 
+#include "emu64/system.h"
+
 #include <string>
 
 namespace Emu64::UI
@@ -11,8 +13,8 @@ namespace Emu64::UI
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
-        // Setup the file browser stuff
         static Emu64::UI::FileBrowser fileBrowser("Load");
+        Emu64::System* system = Emu64::System::Instance();
 
         // Setup the window
         ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
@@ -43,6 +45,7 @@ namespace Emu64::UI
         std::string romPath;
         if (fileBrowser.Render(showRomLoadDialog, romPath))
         {
+            system->LoadRom((char*)romPath.c_str());
             // TODO: Load the rom into the emulator
         }
 

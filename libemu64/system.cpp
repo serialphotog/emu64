@@ -6,6 +6,14 @@
 
 namespace Emu64
 {
+    System* System::m_instance = nullptr;
+    System* System::Instance()
+    {
+        if (!m_instance)
+            m_instance = new System();
+        return m_instance;
+    }
+
     System::System()
     {
         m_cpu = cpu_create();

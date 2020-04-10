@@ -1,13 +1,15 @@
 #include "emu64/pif.h"
 
-#include "emu64/sys/cpu/cpustate.h"
-#include "emu64/sys/cpu/cp0/cp0.h"
+extern "C" {
+    #include "emu64/sys/cpu/cpustate.h"
+    #include "emu64/sys/cpu/cp0/cp0.h"
+}
 
 #include <iostream>
 
 namespace Emu64
 {
-    static void Run(CPU* cpu, Memory* memory)
+    void PIF::Run(CPU* cpu, Memory* memory)
     {
         CPUState* state = cpu->state;
         CP0* cp0 = cpu->cp0;

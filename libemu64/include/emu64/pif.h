@@ -1,7 +1,9 @@
 #pragma once
 
-#include "emu64/sys/cpu/cpu.h"
-#include "emu64/sys/memory.h"
+extern "C" {
+    #include "emu64/sys/cpu/cpu.h"
+    #include "emu64/sys/memory.h"
+}
 
 namespace Emu64
 {

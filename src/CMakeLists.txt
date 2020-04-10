@@ -1,6 +1,12 @@
 project("emu64" VERSION 0.0.1 LANGUAGES CXX)
 
 set(EMU_SRCS
+	imgui/imgui_demo.cpp
+	imgui/imgui_draw.cpp
+	imgui/imgui_widgets.cpp
+	imgui/imgui.cpp 
+	ui/imgui_impl_glfw.cpp
+	ui/imgui_impl_opengl3.cpp
 	main.cpp
 )
 include_directories(.)

@@ -1,4 +1,4 @@
-#include "sys/cpu/cpustate.h"
+#include "emu64/sys/cpu/cpustate.h"
 
 #include <stdlib.h>
 #include <stdio.h>

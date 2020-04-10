@@ -1,9 +1,9 @@
-#include "sys/sys.h"
+#include "emu64/sys/sys.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "sys/pif.h"
+#include "emu64/sys/pif.h"
 
 System* sys_create(EmuFlags* flags) 
 {

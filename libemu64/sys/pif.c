@@ -1,11 +1,11 @@
-#include "sys/pif.h"
+#include "emu64/sys/pif.h"
 
 #include <stdio.h>
 
-#include "sys/cpu/cpu.h"
-#include "sys/cpu/cpustate.h"
-#include "sys/cpu/cp0/cp0.h"
-#include "sys/memory.h"
+#include "emu64/sys/cpu/cpu.h"
+#include "emu64/sys/cpu/cpustate.h"
+#include "emu64/sys/cpu/cp0/cp0.h"
+#include "emu64/sys/memory.h"
 
 void pif_run(System *sys)
 {

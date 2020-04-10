@@ -1,9 +1,9 @@
 #ifndef __EMU_SYS_H__
 #define __EMU_SYS_H__
 
-#include "sys/cpu/cpu.h"
-#include "emu64.h"
-#include "sys/memory.h"
+#include "emu64/sys/cpu/cpu.h"
+#include "emu64/emu64.h"
+#include "emu64/sys/memory.h"
 
 // The primary system structure
 typedef struct System {

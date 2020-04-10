@@ -6,7 +6,7 @@
 #ifndef __EMU_PIF_H__
 #define __EMU_PIF_H__
 
-#include "sys/sys.h"
+#include "emu64/sys/sys.h"
 
 // Runs the emulated PIF
 void pif_run(System *sys);

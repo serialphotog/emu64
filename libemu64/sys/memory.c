@@ -2,12 +2,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#include "sys/memory.h"
-#include "util/byteutils.h"
+#include "emu64/sys/memory.h"
+#include "emu64/util/byteutils.h"
 
 #include <stdio.h>
 
-#include "sys/cpu/cp0/cp0.h"
+#include "emu64/sys/cpu/cp0/cp0.h"
 
 Memory* memory_create() 
 {

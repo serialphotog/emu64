@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "sys.h": "c"
+        "sys.h": "c",
+        "stdio.h": "c",
+        "byteutils.h": "c",
+        "cp0.h": "c",
+        "memory.h": "c",
+        "cpustate.h": "c",
+        "pif.h": "c"
     }
 }

@@ -1,4 +1,4 @@
-#include "sys/cpu/cp1/cp1.h"
+#include "emu64/sys/cpu/cp1/cp1.h"
 
 #include <stdlib.h>
 

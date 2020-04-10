@@ -1,7 +1,7 @@
-#include "sys/cpu/cpu.h"
+#include "emu64/sys/cpu/cpu.h"
 
-#include "emu64.h"
-#include "sys/cpu/opcodes.h"
+#include "emu64/emu64.h"
+#include "emu64/sys/cpu/opcodes.h"
 
 #include <stdlib.h>
 #include <stdio.h>

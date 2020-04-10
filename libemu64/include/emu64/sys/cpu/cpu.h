@@ -1,11 +1,11 @@
 #ifndef __EMU_CPU_H__
 #define __EMU_CPU_H__
 
-#include "sys/cpu/cp0/cp0.h"
-#include "sys/cpu/cp1/cp1.h"
-#include "sys/cpu/cpustate.h"
-#include "emu64.h"
-#include "sys/memory.h"
+#include "emu64/sys/cpu/cp0/cp0.h"
+#include "emu64/sys/cpu/cp1/cp1.h"
+#include "emu64/sys/cpu/cpustate.h"
+#include "emu64/emu64.h"
+#include "emu64/sys/memory.h"
 
 // The primary structure for the CPU
 typedef struct CPU {

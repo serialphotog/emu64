@@ -6,9 +6,16 @@
 #include "emu64/system.h"
 
 #include <string>
+#include <thread>
 
 namespace Emu64::UI
 {
+    static void runEmulatorThread()
+    {
+        Emu64::System* system = Emu64::System::Instance();
+        system->Boot();
+    }
+
     void EmulatorWindow::ShowEmulatorWindow(bool* is_open)
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
@@ -46,7 +53,7 @@ namespace Emu64::UI
         if (fileBrowser.Render(showRomLoadDialog, romPath))
         {
             system->LoadRom((char*)romPath.c_str());
-            // TODO: Load the rom into the emulator
+            std::thread emulatorThread(runEmulatorThread);
         }
 
         ImGui::End();

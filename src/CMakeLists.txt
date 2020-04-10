@@ -5,6 +5,8 @@ set(EMU_SRCS
 	imgui/imgui_draw.cpp
 	imgui/imgui_widgets.cpp
 	imgui/imgui.cpp 
+	ui/emulator_window.cpp
+	ui/file_browser.cpp
 	ui/imgui_impl_glfw.cpp
 	ui/imgui_impl_opengl3.cpp
 	main.cpp

@@ -1,6 +1,7 @@
 #include "imgui/imgui.h"
 #include "ui/imgui_impl_glfw.h"
 #include "ui/imgui_impl_opengl3.h"
+#include "ui/emulator_window.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -63,6 +64,9 @@ int main(int argc, char** argv)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    // UI Flags
+    bool emulator_view_open = true;
+
     // The main UI loop
     while (!glfwWindowShouldClose(window))
     {
@@ -75,6 +79,9 @@ int main(int argc, char** argv)
 
         // TODO: Do the real implementation instead of just showing the demo window
         ImGui::ShowDemoWindow();
+
+        // Display the emulator window
+        Emu64::UI::EmulatorWindow::ShowEmulatorWindow(&emulator_view_open);
 
         // Render
         ImGui::Render();

@@ -5,12 +5,11 @@
 
 #include "emu64/sys/pif.h"
 
-System* sys_create(EmuFlags* flags) 
+System* sys_create() 
 {
     System* sys = calloc(1, sizeof(System));
-    sys->cpu = cpu_create(flags);
+    sys->cpu = cpu_create();
     sys->memory = memory_create();
-    sys->flags = flags;
     
     return sys;
 }

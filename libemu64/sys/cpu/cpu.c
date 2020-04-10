@@ -1,18 +1,16 @@
 #include "emu64/sys/cpu/cpu.h"
 
-#include "emu64/emu64.h"
 #include "emu64/sys/cpu/opcodes.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
-CPU* cpu_create(EmuFlags* flags) 
+CPU* cpu_create() 
 {
     CPU* cpu = calloc(1, sizeof(CPU));
     cpu->cp0 = cp0_create();
     cpu->cp1 = cp1_create();
     cpu->state = cpuState_create();
-    cpu->flags = flags;
 
     return cpu;
 }
@@ -24,11 +22,6 @@ void cpu_run(CPU* cpu, Memory* memory)
         Instruction* instruction = cpu_fetch_instruction(memory, cpu->state->pc);
         cpu_decode_instruction(instruction);
         cpu_execute_instruction(cpu, memory, instruction);
-
-        if (cpu->flags->debugMode && cpu->flags->singleStepMode)
-        {
-            break;
-        }
     }
 }
 

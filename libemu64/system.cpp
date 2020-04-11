@@ -18,6 +18,8 @@ namespace Emu64
     {
         m_memory = new Emu64::Memory();
         m_cpu = new Emu64::Processor::CPU(m_memory);
+        m_flags = new Emu64::EmulatorFlags();
+        m_flags->EmulatorShouldStop = false;
     }
 
     System::~System()

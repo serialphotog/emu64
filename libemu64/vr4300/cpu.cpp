@@ -1,6 +1,8 @@
 #include "emu64/vr4300/cpu.h"
 
+#include "emu64/emulator_flags.h"
 #include "emu64/vr4300/opcodes.h"
+#include "emu64/system.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -119,9 +121,9 @@ namespace Emu64::Processor
 
     void CPU::Run()
     {
-        while(1)
+        Emu64::System* system = Emu64::System::Instance();
+        while(!system->EmulatorFlags()->EmulatorShouldStop)
         {
-            // TODO: We need a more robust run loop system
             Emu64::Processor::Instruction* instruction = FetchInstruction();
             RunInstruction(instruction);
         }

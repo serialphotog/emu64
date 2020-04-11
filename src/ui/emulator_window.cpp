@@ -1,5 +1,6 @@
 #include "ui/emulator_window.h"
 
+#include "emu.h"
 #include "imgui/imgui.h"
 #include "ui/file_browser.h"
 
@@ -16,7 +17,6 @@ namespace Emu64::UI
         system->Boot();
     }
 
-    std::thread emulatorThread;
     void EmulatorWindow::ShowEmulatorWindow(bool* is_open)
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
@@ -53,8 +53,10 @@ namespace Emu64::UI
         std::string romPath;
         if (fileBrowser.Render(showRomLoadDialog, romPath))
         {
+            Emu* instance = Emu::Instance();
             system->LoadRom((char*)romPath.c_str());
-            emulatorThread = std::thread(runEmulatorThread);
+            system->EmulatorFlags()->EmulatorShouldStop = false;
+            instance->ControlFlags()->EmulatorThread = std::thread(runEmulatorThread);
         }
 
         ImGui::End();

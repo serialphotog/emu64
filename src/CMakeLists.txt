@@ -9,6 +9,7 @@ set(EMU_SRCS
 	ui/file_browser.cpp
 	ui/imgui_impl_glfw.cpp
 	ui/imgui_impl_opengl3.cpp
+	emu.cpp
 	main.cpp
 )
 include_directories(.)

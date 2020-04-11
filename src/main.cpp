@@ -2,6 +2,9 @@
 #include "ui/imgui_impl_glfw.h"
 #include "ui/imgui_impl_opengl3.h"
 #include "ui/emulator_window.h"
+#include "emu.h"
+
+#include "emu64/system.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -95,6 +98,12 @@ int main(int argc, char** argv)
 
         glfwSwapBuffers(window);
     }
+
+    // Trigger the emulator loop to stop
+    Emu64::System* system = Emu64::System::Instance();
+    Emu* instance = Emu::Instance();
+    system->EmulatorFlags()->EmulatorShouldStop = true;
+    instance->ControlFlags()->EmulatorThread.join();
 
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();

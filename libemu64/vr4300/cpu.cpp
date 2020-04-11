@@ -79,8 +79,8 @@ namespace Emu64::Processor
 
     Emu64::Processor::Instruction* CPU::FetchInstruction()
     {
-        Emu64::Processor::Register* sp = m_state->GetSpecialRegister("sp");
-        uint32_t data = m_memory->ReadWord(sp->Data());
+        Emu64::Processor::Register* pc = m_state->GetSpecialRegister("pc");
+        uint32_t data = m_memory->ReadWord(pc->Data());
         Emu64::Processor::Instruction* instruction = new Emu64::Processor::Instruction(data);
         instruction->Decode();
         return instruction;

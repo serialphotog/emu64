@@ -4,6 +4,10 @@
 #include <fstream>
 #include <vector>
 
+#include <stdio.h>
+
+#include <iostream>
+
 namespace Emu64
 {
     Rom::Rom()
@@ -19,11 +23,19 @@ namespace Emu64
     void Rom::Read(std::string path)
     {
         // TODO: Error handling!
-        std::ifstream ifs(path.c_str(), std::ios::binary|std::ios::ate);
-        std::ifstream::pos_type pos = ifs.tellg();
-        std::vector<char> result(pos);
-        ifs.seekg(0, std::ios::beg);
-        ifs.read(&result[0], pos);
-        std::copy(result.begin(), result.end(), m_data);
+        FILE* fp = fopen(path.c_str(), "rb");
+        if (fp == NULL)
+        {
+            std::cout << "[ERROR]: Failed to load ROM " << path << std::endl;
+            exit(1);
+        }
+
+        fseek(fp, 0L, SEEK_END);
+        m_size = ftell(fp);
+        fseek(fp, 0L, SEEK_SET);
+
+        m_data = (unsigned char*)malloc(m_size);
+        fread(m_data, m_size, 1, fp);
+        fclose(fp);
     }
 }

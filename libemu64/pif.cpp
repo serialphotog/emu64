@@ -39,8 +39,8 @@ namespace Emu64
         cpu->SetRegisterByName("k0", 0);
         cpu->SetRegisterByName("k1", 0);
         cpu->SetRegisterByName("gp", 0);
-        cpu->SetSpecial("sp", 0xa4001ff0);
-        cpu->SetRegisterByName("a8", 0);
+        cpu->SetRegisterByName("sp", 0xa4001ff0);
+        cpu->SetRegisterByName("s8", 0);
         cpu->SetRegisterByName("ra", 0);
 
         // Set the CP0 register values

@@ -42,7 +42,7 @@ namespace Emu64::Processor
         generalRegs.push_back(new Emu64::Processor::Register("PErr", NULL));
         generalRegs.push_back(new Emu64::Processor::Register("CacheErr", NULL));
         generalRegs.push_back(new Emu64::Processor::Register("TagLo", NULL));
-        generalRegs.push_back(new Emu64::Processor::Register("Taghi", NULL));
+        generalRegs.push_back(new Emu64::Processor::Register("TagHi", NULL));
         generalRegs.push_back(new Emu64::Processor::Register("ErrorEPC", NULL));
         generalRegs.push_back(new Emu64::Processor::Register("r31", NULL));
         return generalRegs;

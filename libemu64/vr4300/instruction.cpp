@@ -14,13 +14,13 @@ namespace Emu64::Processor
 
     void Instruction::Decode()
     {
-        Opcode(FullInstruction() >> 26);
-        RS((FullInstruction() >> 21) & 0x1f);
-        Base(RS());
-        RT((FullInstruction() >> 16) & 0x1f);
-        RD((FullInstruction() >> 11) & 0x1f);
-        SA((FullInstruction() >> 6) & 0x1f);
-        Function(FullInstruction() & 0x3f);
-        Offset(FullInstruction() & 0xffff);
+        m_opcode = m_instruction >> 26;
+        m_rs = (m_instruction >> 21) & 0x1f;
+        m_base = m_rs;
+        m_rt = (m_instruction >> 16) & 0x1f;
+        m_rd = (m_instruction >> 11) & 0x1f;
+        m_sa = (m_instruction >> 6) & 0x1f;
+        m_function = m_instruction & 0x3f;
+        m_offset = m_instruction & 0xffff;
     }
 }

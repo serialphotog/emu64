@@ -3,6 +3,7 @@
 #include "emu64/vr4300/opcodes.h"
 
 #include <iostream>
+#include <stdio.h>
 
 namespace Emu64::Processor
 {
@@ -101,8 +102,7 @@ namespace Emu64::Processor
                 }
                 else 
                 {
-                    std::cout << "[CPU]: Unknown MFC0/MTC0 flag: " << std::hex << instruction->RS() 
-                        << std::dec << std::endl;
+                    printf("[CPU]: Unknown MFC0/MTC0 flag: %#04x\n", instruction->RS());
                 }
                 break;
             case OP_LUI:
@@ -112,8 +112,7 @@ namespace Emu64::Processor
                 ADDIU(instruction->RS(), instruction->RT(), instruction->Offset());
                 break;
             default:
-                std::cout << "[CPU]: Unknown instruction: " << std::hex << instruction->Opcode()
-                    << std::dec << std::endl;
+                printf("[CPU]: Unknown instruction: %#04x\n", instruction->Opcode());
                 break;
         }
     }

@@ -76,7 +76,7 @@ namespace Emu64
                 return nullptr;
             }
 
-            return new Emu64::MemorySection(ROM_OFFSET, m_rom);
+            return new Emu64::MemorySection(ROM_OFFSET, m_rom->Data());
         }
     }
 

@@ -6,8 +6,6 @@ set (LIB_EMU64_SRCS
     memory.cpp
     memory_section.cpp
     rom.cpp
-    util/byteutils.c
-    sys/memory.c
     sys/cpu/cpu.c 
     sys/cpu/cpustate.c 
     sys/cpu/cp0/cp0.c 

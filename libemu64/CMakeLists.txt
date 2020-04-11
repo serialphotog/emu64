@@ -3,6 +3,9 @@ project("libemu64" VERSION 0.0.1 LANGUAGES CXX C)
 set (LIB_EMU64_SRCS
     system.cpp
     pif.cpp
+    memory.cpp
+    memory_section.cpp
+    rom.cpp
     util/byteutils.c
     sys/memory.c
     sys/cpu/cpu.c 

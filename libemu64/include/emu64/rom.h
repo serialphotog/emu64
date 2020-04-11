@@ -7,10 +7,10 @@ namespace Emu64
     class Rom
     {
         public:
-            Rom(unsigned char* data, size_t size);
+            Rom();
             ~Rom();
 
-            void ReadRom(std::string path);
+            void Read(std::string path);
 
             unsigned char* Data() const { return m_data; }
             size_t Size() const { return m_size; }

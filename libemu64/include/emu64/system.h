@@ -1,9 +1,7 @@
 #pragma once
 
-extern "C" {
-    #include "emu64/sys/cpu/cpu.h"
-    #include "emu64/sys/memory.h"
-}
+#include "emu64/memory.h"
+#include "emu64/vr4300/cpu.h"
 
 namespace Emu64
 {
@@ -27,10 +25,10 @@ namespace Emu64
             static System* m_instance;
 
             // The system's CPU
-            CPU* m_cpu;
+            Emu64::Processor::CPU* m_cpu;
 
             // The system's memory subsystem
-            Memory* m_memory;
+            Emu64::Memory* m_memory;
 
             // Needed for singleton
             System();

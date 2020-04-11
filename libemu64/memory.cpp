@@ -80,6 +80,12 @@ namespace Emu64
         }
     }
 
+    void Memory::LoadRom(const std::string path)
+    {
+        m_rom = new Emu64::Rom();
+        m_rom->Read(path);
+    }
+
     uint32_t Memory::MapVirtAddr(uint32_t virt_addr)
     {
         return virt_addr & 0x1FFFFFFF;

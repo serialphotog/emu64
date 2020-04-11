@@ -60,6 +60,9 @@ namespace Emu64
             Memory();
             ~Memory();
 
+            // Loads a ROM into memory
+            void LoadRom(const std::string path);
+
             // Read/Write a single byte from/to memory
             uint8_t ReadByte(uint32_t addr);
             void WriteByte(uint32_t addr, uint8_t value);

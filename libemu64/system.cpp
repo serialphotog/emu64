@@ -16,19 +16,20 @@ namespace Emu64
 
     System::System()
     {
-        m_cpu = cpu_create();
-        m_memory = memory_create();
+        m_memory = new Emu64::Memory();
+        m_cpu = new Emu64::Processor::CPU(m_memory);
     }
 
     System::~System()
     {
-        cpu_destory(m_cpu);
+        delete m_cpu;
+        delete m_memory;
     }
 
     void System::LoadRom(char* path)
     {
         std::cout << "[INFO]: Loaded rom " << path << std::endl;
-        memory_load_rom(m_memory, path);
+        m_memory->LoadRom(path);
     }
 
     void System::Boot()
@@ -36,6 +37,6 @@ namespace Emu64
         std::cout << "[INFO]: Running the emulated PIF." << std::endl;
         Emu64::PIF::Run(m_cpu, m_memory);
         std::cout << "[INFO]: Handing execution over to the CPU." << std::endl;
-        cpu_run(m_cpu, m_memory);
+        m_cpu->Run();
     }
 }

@@ -6,10 +6,12 @@ set (LIB_EMU64_SRCS
     memory.cpp
     memory_section.cpp
     rom.cpp
-    sys/cpu/cpu.c 
-    sys/cpu/cpustate.c 
-    sys/cpu/cp0/cp0.c 
-    sys/cpu/cp1/cp1.c 
+    vr4300/processor.cpp
+    vr4300/cp0.cpp
+    vr4300/processor_state.cpp
+    vr4300/register.cpp
+    vr4300/instruction.cpp
+    vr4300/cpu.cpp
 )
 add_library(${PROJECT_NAME} STATIC ${LIB_EMU64_SRCS})
 target_include_directories(${PROJECT_NAME}

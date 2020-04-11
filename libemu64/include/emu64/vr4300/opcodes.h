@@ -1,5 +1,4 @@
-#ifndef __EMU_OPCODES_H__
-#define __EMU_OPCODES_H__
+#pragma once
 
 // Opcode definitions
 #define OP_MFC0 0x10
@@ -10,5 +9,3 @@
 // Switch definitions for opcodes
 #define MFC0_RS_FLAG 0x0
 #define MTC0_RS_FLAG 0x4
-
-#endif

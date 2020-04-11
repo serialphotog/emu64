@@ -6,8 +6,7 @@
 
 namespace Emu64
 {
-    Rom::Rom(unsigned char* data, size_t size) :
-        m_data(data), m_size(size)
+    Rom::Rom()
     {
 
     }
@@ -17,7 +16,7 @@ namespace Emu64
         if (m_data != nullptr) delete m_data;
     }
 
-    void Rom::ReadRom(std::string path)
+    void Rom::Read(std::string path)
     {
         // TODO: Error handling!
         std::ifstream ifs(path.c_str(), std::ios::binary|std::ios::ate);

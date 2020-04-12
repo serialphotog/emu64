@@ -19,6 +19,8 @@ static void glfw_error_callback(int error, const char* msg)
 
 int main(int argc, char** argv)
 {
+    Emu* instance = Emu::Instance();
+
     // Setup the window
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -73,6 +75,9 @@ int main(int argc, char** argv)
     // The main UI loop
     while (!glfwWindowShouldClose(window))
     {
+        if (instance->ControlFlags()->CloseRequested)
+            glfwSetWindowShouldClose(window, true);
+
         glfwPollEvents();
 
         // Start the ImGUI frame
@@ -101,9 +106,9 @@ int main(int argc, char** argv)
 
     // Trigger the emulator loop to stop
     Emu64::System* system = Emu64::System::Instance();
-    Emu* instance = Emu::Instance();
     system->EmulatorFlags()->EmulatorShouldStop = true;
-    instance->ControlFlags()->EmulatorThread.join();
+    if (system->EmulatorFlags()->Running)
+        instance->ControlFlags()->EmulatorThread.join();
 
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();

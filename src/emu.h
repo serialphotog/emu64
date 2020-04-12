@@ -5,6 +5,7 @@
 // Provides shared control resources to the emulator frontend
 typedef struct ControlFlags {
     std::thread EmulatorThread;
+    bool CloseRequested = false;
 } ControlFlags;
 
 class Emu

@@ -20,6 +20,7 @@ namespace Emu64
         m_cpu = new Emu64::Processor::CPU(m_memory);
         m_flags = new Emu64::EmulatorFlags();
         m_flags->EmulatorShouldStop = false;
+        m_flags->Running = false;
     }
 
     System::~System()
@@ -37,8 +38,10 @@ namespace Emu64
     void System::Boot()
     {
         std::cout << "[INFO]: Running the emulated PIF." << std::endl;
+        m_flags->Running = true;
         Emu64::PIF::Run(m_cpu, m_memory);
         std::cout << "[INFO]: Handing execution over to the CPU." << std::endl;
         m_cpu->Run();
+        m_flags->Running = false;
     }
 }

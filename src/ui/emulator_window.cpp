@@ -21,6 +21,7 @@ namespace Emu64::UI
     {
         IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
+        Emu* instance = Emu::Instance();
         static Emu64::UI::FileBrowser fileBrowser("Load");
         Emu64::System* system = Emu64::System::Instance();
 
@@ -36,37 +37,46 @@ namespace Emu64::UI
 
         // Menu Bar
         bool showRomLoadDialog = false;
+        bool closeRequested = false;
+        bool emulatorShouldStop = false;
         if (ImGui::BeginMainMenuBar())
         {
             if (ImGui::BeginMenu("File"))
             {
                 if (ImGui::MenuItem("Load ROM")) 
                     showRomLoadDialog = true;
+                ImGui::Separator();
+                if (ImGui::MenuItem("Exit"))
+                    closeRequested = true;
 
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Emulator"))
+            {
+                if (ImGui::MenuItem("Stop Execution"))
+                    emulatorShouldStop = true;
+                
                 ImGui::EndMenu();
             }
 
             ImGui::EndMainMenuBar();
         }
 
+        if (emulatorShouldStop)
+            system->EmulatorFlags()->EmulatorShouldStop = true;
+        if (closeRequested)
+            instance->ControlFlags()->CloseRequested = true;
+
         // Handle the load dialog
         std::string romPath;
         if (fileBrowser.Render(showRomLoadDialog, romPath))
         {
-            Emu* instance = Emu::Instance();
             system->LoadRom((char*)romPath.c_str());
             system->EmulatorFlags()->EmulatorShouldStop = false;
             instance->ControlFlags()->EmulatorThread = std::thread(runEmulatorThread);
         }
 
         ImGui::End();
-    }
-
-    void EmulatorWindow::ShowFileMenu()
-    {
-        if (ImGui::MenuItem("Load ROM")) 
-            ImGui::OpenPopup("Open");
-
-        ImGui::EndMenu();
     }
 }
